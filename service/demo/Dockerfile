@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir gunicorn
 EXPOSE 8000
 
 RUN python manage.py migrate
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
 
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "-w", "4", "project.wsgi"]
