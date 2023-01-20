@@ -46,7 +46,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t hi --file ./services/django_platform/Dockerfile
+        docker build -t hi -f ./services/django_platform/Dockerfile
         docker ps
         docker run -d -e ${{ secrets.SECRET_KEY }} hi
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
