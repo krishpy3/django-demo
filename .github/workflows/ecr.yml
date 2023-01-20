@@ -47,7 +47,7 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         ls -l
-        cd services/django_platform
+        cd service/demo
         docker build -t hi .
         docker ps
         docker run -d -e ${{ secrets.SECRET_KEY }} hi
