@@ -16,7 +16,11 @@
             "environment": [
                 {
                     "name": "SECRET_KEY",
-                    "value": "hello"
+                    "value": "<SECRET_KEY>"
+                },
+                {
+                    "name": "ALLOWED_HOSTS",
+                    "value": "*"
                 }
             ],
             "environmentFiles": [],
