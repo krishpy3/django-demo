@@ -8,7 +8,11 @@ on:
 
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: helloworld          # set this to your Amazon ECR repository name
+  ECR_REPOSITORY: django_app          # set this to your Amazon ECR repository name
+  ECS_SERVICE: demo-deploy                # set this to your Amazon ECS service name
+  ECS_CLUSTER: demo-deploy                 # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: task-definition.json      # set this to the path to your Amazon ECS task definition
+  CONTAINER_NAME: demo-deploy 
    
 
 permissions:
@@ -48,8 +52,25 @@ jobs:
         # be deployed to ECS.
         ls -l
         cd service/demo
-        docker build -t django_app .
-        docker ps
-        docker tag django_app:latest 462426397022.dkr.ecr.us-east-1.amazonaws.com/django_app:latest
-        docker push 462426397022.dkr.ecr.us-east-1.amazonaws.com/django_app:latest
+        # docker build -t $ECR_REPOSITORY .
+        # docker images
+        # docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+    # - name: Fill in the new image ID in the Amazon ECS task definition
+    #   id: task-def
+    #   uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+    #   with:
+    #     task-definition: ${{ env.ECS_TASK_DEFINITION }}
+    #     container-name: ${{ env.CONTAINER_NAME }}
+    #     image: ${{ steps.build-image.outputs.image }}
+
+    # - name: Deploy Amazon ECS task definition
+    #   uses: aws-actions/amazon-ecs-deploy-task-definition@de0132cf8cdedb79975c6d42b77eb7ea193cf28e
+    #   with:
+    #     task-definition: ${{ steps.task-def.outputs.task-definition }}
+    #     service: ${{ env.ECS_SERVICE }}
+    #     cluster: ${{ env.ECS_CLUSTER }}
+    #     wait-for-service-stability: true
+
 
