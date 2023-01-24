@@ -1,0 +1,33 @@
+{
+  "family": "my-containers",
+  "containerDefinitions": [
+    {
+      "name": "coreapplication",
+      "image": "462426397022.dkr.ecr.us-east-1.amazonaws.com/django_app:latest",
+      "cpu": 512,
+      "memory": 512,
+      "networkMode": "awsvpc",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/testapp",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 80
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "SECRET_VALUE",
+          "value": "production"
+        }
+      ]
+    }
+  ]
+}
