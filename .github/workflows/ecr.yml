@@ -52,10 +52,10 @@ jobs:
         # be deployed to ECS.
         ls -l
         cd service/demo
-        # docker build -t $ECR_REPOSITORY .
-        # docker images
-        # docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
-        # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker build -t $ECR_REPOSITORY .
+        docker images
+        docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
     # - name: Fill in the new image ID in the Amazon ECS task definition
     #   id: task-def
